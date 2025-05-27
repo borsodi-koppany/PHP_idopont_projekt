@@ -1,6 +1,32 @@
+<?php
+
+require_once 'db.php';
+$dbModel = new dataBase("localhost", "root", "", "idopont.php");
+$users[] = $dbModel->GetUsers();
+$emails = [];
+foreach($users as $u){
+    $email.array_push($u->email);
+}
+$errors = [];
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $email = htmlspecialchars($_POST['email']) ?? "";
+    $pw = htmlspecialchars($_POST['password']) ?? "";
+    $pw_a = htmlspecialchars($_POST['password_again'])?? "";
+    
+    if((empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))){
+        $errors[] = "Érvényes email címet adjon meg!";
+    }
+    if(in_array($email, $emails)){
+        $errors[] = "Ezzel az email címmel már létezik felhasználó!";
+    }
+
+
+}
+
+?>
 <h1>Fiók létrehozása!</h1>
 
-<form method="POST" action="?todo=add">
+<form method="POST" action="signin.php">
     <div class="mb-3">
         <label for="Email" class="form-label">Email cím:</label>
         <input type="email" class="form-control" id="email" name="email">
