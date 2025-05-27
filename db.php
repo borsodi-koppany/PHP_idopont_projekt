@@ -44,4 +44,29 @@ class dataBase{
         $sql = "DELETE FROM appointments WHERE id = $id";
         $this->conn->query($sql);
     }
+
+    function GetUsersAppointments($email){
+        $sql = "SELECT * FROM appointments WHERE email = $email";
+        $result = $this->conn->query($sql);
+        $usersAppointments = [];
+        while($row = $result->fetch_object()){
+            $usersAppointments[] = new appointment($row->id, $row->email, $row->date, $row->time, $row->type, $row->isApproved);
+        }
+        return $usersAppointments;
+    }
+
+    function GetUsers(){
+        $sql = "SELECT * FROM users";
+        $result = $this->conn->query($sql);
+        $users = [];
+        while($row = $result->fetch_object()){
+            $users[] = new user($row->email, $row->password, $row->isAdmin);
+        }
+        return $users;
+    }
+
+    function CreateNewUser($email, $password){
+        $sql = "INSERT INTO users (email, password, isAdmin) VALUES ('$email', '$password', 0)";
+        $this->conn->query($sql);
+    }
 }
