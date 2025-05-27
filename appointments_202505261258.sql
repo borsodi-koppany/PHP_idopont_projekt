@@ -1,4 +1,6 @@
-﻿CREATE DATABASE idopont_php
+﻿DROP DATABASE IF EXISTS idopont_php;
+  
+CREATE DATABASE idopont_php
 	CHARACTER SET utf8mb4
 	COLLATE utf8mb4_general_ci;
 
@@ -12,18 +14,36 @@ SET NAMES 'utf8';
 --
 USE idopont_php;
 
+CREATE TABLE idopont_php.users (
+  email varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  isAdmin boolean DEFAULT FALSE,
+  PRIMARY KEY (email)
+)
+
+ENGINE = INNODB,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_general_ci,
+ROW_FORMAT = DYNAMIC;
+
 --
 -- Create table `appointments`
 --
 CREATE TABLE appointments (
   id INT(11) NOT NULL AUTO_INCREMENT,
-  email VARCHAR(50) DEFAULT NULL,
+  email VARCHAR(255) NOT NULL,
   date DATETIME DEFAULT NULL,
   time VARCHAR(255) DEFAULT NULL,
   type VARCHAR(255) DEFAULT NULL,
-  isApproved BOOLEAN DEFAULT NULL,
-  PRIMARY KEY (id)
+  isApproved BOOLEAN DEFAULT FALSE,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_user_email FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE ON UPDATE CASCADE
 )
+
+
+
+
+
 ENGINE = INNODB,
 CHARACTER SET utf8mb4,
 COLLATE utf8mb4_general_ci,

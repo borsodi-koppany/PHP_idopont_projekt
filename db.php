@@ -1,6 +1,6 @@
 <?php 
 
-class appointments{
+class dataBase{
     private $conn;
     
     function __construct($server, $user, $password, $database){
