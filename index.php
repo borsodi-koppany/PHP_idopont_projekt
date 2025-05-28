@@ -8,8 +8,20 @@
 </head>
 <body>
     <div class="container">
+        <a href="?todo=signin" class="btn btn-rpimary">Regisztráció</a>
         <?php
-            include_once "signin.php";
+        include_once "db.php";
+        $dbModel = new dataBase("localhost", "root", "", "idopont_php");
+        $todo = $_GET['todo']?? 'list';
+        switch($todo){
+            case 'signin':
+                include_once "signin.php";
+                break;
+            case 'list':
+                // header("Location: index.php");
+                break;
+        }
+
         ?>
     </div>
 </body>

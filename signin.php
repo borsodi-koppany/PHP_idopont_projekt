@@ -1,11 +1,14 @@
 <?php
 
 require_once 'db.php';
-$dbModel = new dataBase("localhost", "root", "", "idopont.php");
+require_once 'user.php';
+$dbModel = new dataBase("localhost", "root", "", "idopont_php");
 $users[] = $dbModel->GetUsers();
 $emails = [];
-foreach($users as $u){
-    $email.array_push($u->email);
+if(count($users) != 0){
+    foreach($users as $u){
+        // $email.array_push($u->email);
+    }
 }
 $errors = [];
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -14,13 +17,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $pw_a = htmlspecialchars($_POST['password_again'])?? "";
     
     if((empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL))){
-        $errors[] = "Érvényes email címet adjon meg!";
+        $errors["email"] = "Érvényes email címet adjon meg!";
     }
     if(in_array($email, $emails)){
-        $errors[] = "Ezzel az email címmel már létezik felhasználó!";
+        $errors["email_exists"] = "Ezzel az email címmel már létezik felhasználó!";
     }
-
-
+    if($pw != $pw_a){
+        $errors["password"] = "A megadott jelszavak nem egyeznek!";
+    }
+    
+    if(count($errors) == 0){
+        $dbModel->CreateNewUser($email, $pw);
+        $_POST['user'] = new user($email, $pw, 0);
+        header("Location: index.php");
+    }
 }
 
 ?>
