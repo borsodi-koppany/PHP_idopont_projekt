@@ -46,7 +46,7 @@ class dataBase{
     }
 
     function GetUsersAppointments($email){
-        $sql = "SELECT * FROM appointments WHERE email = $email";
+        $sql = "SELECT * FROM appointments WHERE email = '$email'";
         $result = $this->conn->query($sql);
         $usersAppointments = [];
         while($row = $result->fetch_object()){

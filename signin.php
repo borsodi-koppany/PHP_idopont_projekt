@@ -2,8 +2,9 @@
 
 require_once 'db.php';
 require_once 'user.php';
+session_start();
 $dbModel = new dataBase("localhost", "root", "", "idopont_php");
-$users[] = $dbModel->GetUsers();
+$users = $dbModel->GetUsers();
 $emails = [];
 if(count($users) != 0){
     foreach($users as $u){
@@ -28,7 +29,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
     if(count($errors) == 0){
         $dbModel->CreateNewUser($email, $pw);
-        $_POST['user'] = new user($email, $pw, 0);
+        $_SESSION["email"] = $email;
+        
         header("Location: index.php");
     }
 }

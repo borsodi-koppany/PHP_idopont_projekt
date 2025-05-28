@@ -8,7 +8,6 @@
 </head>
 <body>
     <div class="container">
-        <a href="?todo=signin" class="btn btn-rpimary">Regisztráció</a>
         <?php
         include_once "db.php";
         $dbModel = new dataBase("localhost", "root", "", "idopont_php");
@@ -18,7 +17,10 @@
                 include_once "signin.php";
                 break;
             case 'list':
-                // header("Location: index.php");
+                include_once "listAppointments.php";
+                break;
+            case 'newAp':
+                include_once "addAppointment.php";
                 break;
         }
 
