@@ -11,6 +11,8 @@
         <?php
         include_once "db.php";
         $dbModel = new dataBase("localhost", "root", "", "idopont_php");
+
+        // $dbModel->CreateNewUser()
         $todo = $_GET['todo']?? 'list';
         switch($todo){
             case 'signin':
@@ -22,6 +24,16 @@
             case 'newAp':
                 include_once "addAppointment.php";
                 break;
+            case 'logOut':
+                session_start();
+                session_unset();
+                session_destroy();
+                include_once "listAppointments.php";
+                break;
+            case 'logIn':
+                include_once "login.php";
+                break;
+
         }
 
         ?>

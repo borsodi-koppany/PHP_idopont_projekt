@@ -7,14 +7,15 @@ session_start();
 $dbModel = new dataBase("localhost", "root", "", "idopont_php");
 $user = $_SESSION["email"] ?? "";
 $appointments = [];
-var_dump($user);
 if ($user == "") {
     $appointments = $dbModel->GetApprovedAppointments();
     echo "<a href='?todo=signin' class='btn btn-primary'>Regisztráció</a>";
+    echo "<a href='?todo=logIn' class='btn btn-primary'>Bejelentkezés</a>";
 }
 else{
     $appointments = $dbModel->GetUsersAppointments($user);
     echo "<a href='?todo=newAp' class='btn btn-primary'>Időpont foglalása</a>";
+    echo "<a href='?todo=logOut' class='btn btn-primary'>Kijelentkezés</a>";
 
 }
 echo "<table class='table table-striped'>";
