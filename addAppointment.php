@@ -4,6 +4,7 @@
     require_once "user.php";
     $dbmodel = new dataBase("localhost", "root", "", "idopont_php");
     $user = $_SESSION["email"];
+    var_dump($user);
     $errors =[];
     $types = ['vagas', 'borotvalas', 'festes', 'egyeb'];
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -21,8 +22,8 @@
 ?>
 <form action="addAppointment.php" method="POST">
     <div class="mb-3">
-        <label for="Email" value="<?=$user?>" class="form-label">Email cím:</label>
-        <input type="email" class="form-control" id="email" name="email_ap">
+        <label for="Email"  class="form-label">Email cím:</label>
+        <input type="email" value="<?= $user?>" class="form-control" id="email" name="email_ap">
     </div>
     <div class="mb-3">
         <label for="date" class="form-label">Dátum:</label>

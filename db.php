@@ -1,5 +1,5 @@
 <?php 
-
+require_once "appointment.php";
 class dataBase{
     private $conn;
     
