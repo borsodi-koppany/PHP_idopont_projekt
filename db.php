@@ -65,8 +65,8 @@ class dataBase{
         return $users;
     }
 
-    function CreateNewUser($email, $password){
-        $sql = "INSERT INTO users (email, password, isAdmin) VALUES ('$email', '$password', 0)";
+    function CreateNewUser($email, $password, $isAdmin){
+        $sql = "INSERT INTO users (email, password, isAdmin) VALUES ('$email', '$password', $isAdmin)";
         $this->conn->query($sql);
     }
 }

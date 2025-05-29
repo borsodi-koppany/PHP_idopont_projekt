@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     
     if(count($errors) == 0){
-        $dbModel->CreateNewUser($email, $pw);
+        $dbModel->CreateNewUser($email, $pw, 0);
         $_SESSION["email"] = $email;
         
         header("Location: index.php");

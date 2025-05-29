@@ -9,10 +9,19 @@
 <body>
     <div class="container">
         <?php
+        require_once "user.php";
         include_once "db.php";
+        session_start();
         $dbModel = new dataBase("localhost", "root", "", "idopont_php");
-
-        // $dbModel->CreateNewUser()
+        $user = $_SESSION['email']?? "";
+        $users = $dbModel->GetUsers();
+        foreach($users as $u){
+            if($u->email == $user && $u->isAdmin == 1){
+                include_once "admin.php";
+            }
+        }
+        // admin user
+        // $dbModel->CreateNewUser('admnin@a.a', 'blanky', 1);
         $todo = $_GET['todo']?? 'list';
         switch($todo){
             case 'signin':

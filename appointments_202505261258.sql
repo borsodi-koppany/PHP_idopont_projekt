@@ -40,7 +40,7 @@ CREATE TABLE appointments (
   CONSTRAINT fk_user_email FOREIGN KEY (email) REFERENCES users(email) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
-
+INSERT INTO users (email, password, isAdmin) VALUES ('admnin@a.a', 'blanky', 1)
 
 
 
