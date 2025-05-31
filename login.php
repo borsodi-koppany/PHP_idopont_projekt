@@ -9,19 +9,26 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $email = htmlspecialchars($_POST["email_lg"]) ?? "";
     $pw = htmlspecialchars($_POST["password_lg"]) ?? "";
 
+
     //TODO: inputcheck
     if(count($errors) == 0){
 
-        if(in_array(new user($email, $pw, 0), $users)){ //replace the 0 later when admin page/system is implemented
             foreach($users as $u){
                 if($u->email == $email && $u->password == $pw){
                     echo "oge";
                     $_SESSION['email'] = $email;
-                    $_POST['todo'] = 'list';
+                    $_SESSION['isAdmin'] = $u->isAdmin;
+
+                    if($u->isAdmin == 1) {
+                        header("Location: admin.php");
+                        exit;
+                    }
+                    else $_POST['todo'] = 'list';
                     header("Location:  index.php");                    
                 }
+                
             }
-        }
+        
     }
 }
 

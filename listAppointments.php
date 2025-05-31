@@ -6,7 +6,15 @@ require_once "user.php";
 session_start();
 $dbModel = new dataBase("localhost", "root", "", "idopont_php");
 $user = $_SESSION["email"] ?? "";
+// $users = $dbModel->GetUsers();
 $appointments = [];
+// foreach($users as $u){
+//     if($u->email == $user && $u->isAdmin == 1){
+//         echo "gugi";
+//         // include_once "admin.php";
+//         // exit;
+//     }
+// }
 if ($user == "") {
     $appointments = $dbModel->GetApprovedAppointments();
     echo "<a href='?todo=signin' class='btn btn-primary'>Regisztráció</a>";

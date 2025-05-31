@@ -11,18 +11,18 @@
         <?php
         require_once "user.php";
         include_once "db.php";
-        session_start();
+        // session_start();
         $dbModel = new dataBase("localhost", "root", "", "idopont_php");
-        $user = $_SESSION['email']?? "";
-        $users = $dbModel->GetUsers();
-        foreach($users as $u){
-            if($u->email == $user && $u->isAdmin == 1){
-                include_once "admin.php";
-            }
-        }
+        
+        // foreach($users as $u){
+        //     if($u->email == $user && $u->isAdmin == 1){
+        //         include_once "admin.php";
+        //     }
+        // }
         // admin user
         // $dbModel->CreateNewUser('admnin@a.a', 'blanky', 1);
         $todo = $_GET['todo']?? 'list';
+        echo $todo;
         switch($todo){
             case 'signin':
                 include_once "signin.php";
