@@ -4,7 +4,6 @@ require_once "db.php";
 require_once "user.php";
 $dbmodel = new dataBase("localhost", "root", "", "idopont_php");
 $user = $_SESSION["email"];
-var_dump($user);
 $errors = [];
 $types = ['vágás', 'borotválás', 'festés', 'egyéb'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -15,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($email) || $user != $email) $errors[] = "Az email cím nem egyezik meg a fiók email címével!";
     if (empty($date)) $errors[] = "Válasszon dátumot!";
-    if (empty($time)) $errors[] = "Adjon meg egy időpontot!";
+    if (empty($time) || $time == "Kérem válasszon...") $errors[] = "Adjon meg egy időpontot!";
     if (empty($type) || $type == "Kérem válasszon...") $errors[] = "Válassza ki a szolgáltatás típusát!";
     //TODO: something isnt right
     if (count($errors) == 0) {
@@ -29,13 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <head>
     <meta charset="UTF-8">
-    <title>Fiók létrehozása</title>
+    <title>Időpont foglalás</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="container">
-
+        <h1>Gömbi's barbershop</h1>
+        <h3>Időpont foglalása:</h3>
         <form action="addAppointment.php" method="POST">
             <div class="mb-3">
                 <label for="Email" class="form-label">Email cím:</label>
@@ -47,7 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="mb-3">
                 <label for="time" class="form-label">Időpont:</label>
-                <input type="text" class="form-control" id="time" name="time_ap" value="<?=$time?>">
+                <select name="time_ap" id="time" class="form-select">
+                    <option selected>Kérem válasszon...</option>
+                    <?php
+                    for($i = 8; $i < 15; $i++){
+                        echo "<option value='$i:00'>$i:00</option>";
+                    }
+                    ?>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="type" class="form-label">Szolgáltatás típusa:</label>
