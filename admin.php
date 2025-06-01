@@ -11,8 +11,9 @@
 
 <body>
     <div class="container">
+        <h1>Gömbi's barbershop admin felület</h1>
         <a href="index.php?todo=logOut" class='btn btn-primary'>Kijelentkezés</a>
-
+        <h3>Időpontok listája:</h3>
         <table class="table table-striped">
             <thead>
                 <tr>
