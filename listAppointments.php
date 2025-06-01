@@ -24,6 +24,7 @@ else{
     $appointments = $dbModel->GetUsersAppointments($user);
     echo "<a href='?todo=newAp' class='btn btn-primary'>Időpont foglalása</a>";
     echo "<a href='?todo=logOut' class='btn btn-primary'>Kijelentkezés</a>";
+    echo "<a href='?todo=deleteUser&email=$user' class='btn btn-danger'>Fiók törlése</a>";
 
 }
 echo "<table class='table table-striped'>";

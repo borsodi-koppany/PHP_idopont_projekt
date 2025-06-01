@@ -10,8 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $pw = htmlspecialchars($_POST["password_lg"]) ?? "";
     $isCorrect = false;
 
-    //TODO: inputcheck
-
 
     foreach ($users as $u) {
         if ($u->email == $email && $u->password == $pw) {

@@ -41,9 +41,17 @@
             case 'logIn':
                 include_once "login.php";
                 break;
-
+            case 'deleteUser':
+                if(isset($_GET['email'])){
+                    $email = htmlspecialchars($_GET['email']);
+                    $dbModel->DeleteUser($email);
+                    session_start();
+                    session_unset();
+                    session_destroy();
+                }
+                header("Location: index.php?todo=list");
+                break;
         }
-
         ?>
     </div>
 </body>

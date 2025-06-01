@@ -69,4 +69,9 @@ class dataBase{
         $sql = "INSERT INTO users (email, password, isAdmin) VALUES ('$email', '$password', $isAdmin)";
         $this->conn->query($sql);
     }
+
+    function DeleteUser($email){
+        $sql = "DELETE FROM users WHERE email = '$email'";
+        $this->conn->query($sql);
+    }
 }
