@@ -75,8 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
             ?>
             <div class="mb-3">
-                <h6>Már van fiókod? <a href="">Bejelentkezés</a></h4>
-                    <button type="submit" class="btn btn-primary">Fiók létrehozása</button>
+                <h6>Már van fiókod? <a href="index.php?todo=logIn">Bejelentkezés</a></h6>
+                <button type="submit" class="btn btn-primary">Fiók létrehozása</button>
             </div>
         </form>
     </div>
