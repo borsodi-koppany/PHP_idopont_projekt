@@ -48,11 +48,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <form method="POST" action="login.php">
             <div class="mb-3">
                 <label for="Email" class="form-label">Email cím:</label>
-                <input type="email" class="form-control" id="email" name="email_lg">
+                <input type="email" class="form-control" id="email" name="email_lg" value="<?=$_SERVER['REQUEST_METHOD'] == 'POST'? $email : "" ?>">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Jelszó:</label>
-                <input type="password" class="form-control" id="password" name="password_lg">
+                <input type="password" class="form-control" id="password" name="password_lg" value="<?=$_SERVER['REQUEST_METHOD'] == 'POST'? $pw : ""?>">
             </div>
             <?= $_SERVER['REQUEST_METHOD'] == 'POST' && !$isCorrect ? "<div class='p-3 mb-2 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3'> Az email cím vagy a jelszó nem megfelelő! </div>" : "" ?>
             <div class="mb-3">

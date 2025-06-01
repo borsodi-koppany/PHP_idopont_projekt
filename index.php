@@ -22,7 +22,6 @@
         // admin user
         // $dbModel->CreateNewUser('admnin@a.a', 'blanky', 1);
         $todo = $_GET['todo']?? 'list';
-        echo $todo;
         switch($todo){
             case 'signin':
                 include_once "signin.php";

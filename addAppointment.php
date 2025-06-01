@@ -13,10 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $time = htmlspecialchars($_POST['time_ap']) ?? '';
     $type = htmlspecialchars($_POST['type_ap']) ?? '';
 
-    if (empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Érvényes email címet adjon meg!";
+    if (empty($email) || $user != $email) $errors[] = "Az email cím nem egyezik meg a fiók email címével!";
     if (empty($date)) $errors[] = "Válasszon dátumot!";
     if (empty($time)) $errors[] = "Adjon meg egy időpontot!";
-    if (empty($type)) $errors[] = "Válassza ki a szolgáltatás típusát!";
+    if (empty($type) || $type == "Kérem válasszon...") $errors[] = "Válassza ki a szolgáltatás típusát!";
     //TODO: something isnt right
     if (count($errors) == 0) {
         $dbmodel->AddAppointment($email, $date, $time, $type);
@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="mb-3">
                 <label for="date" class="form-label">Dátum:</label>
-                <input type="date" class="form-control" id="date" name="date_ap">
+                <input type="date" class="form-control" id="date" name="date_ap" value="<?=$date?>">
             </div>
             <div class="mb-3">
                 <label for="time" class="form-label">Időpont:</label>
-                <input type="text" class="form-control" id="time" name="time_ap">
+                <input type="text" class="form-control" id="time" name="time_ap" value="<?=$time?>">
             </div>
             <div class="mb-3">
                 <label for="type" class="form-label">Szolgáltatás típusa:</label>
